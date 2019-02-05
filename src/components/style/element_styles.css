@@ -1,0 +1,102 @@
+/* Forms and it's components related styling */
+
+.formStyle {
+  max-width: 30%;
+  margin-left: 10%;
+  margin-top: 10%;
+}
+
+.formStyle h1 {
+  display: block;
+  text-align: center;
+  padding: 0;
+  margin-bottom: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: x-large;
+  color: rgba(0, 0, 0, 0.767);
+}
+
+.formStyle ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.formStyle li {
+  display: block;
+  padding: 10px;
+  border: 1px solid #9e9999;
+  margin-bottom: 30px;
+  border-radius: 10px;
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.formStyle li:last-child {
+  border: none;
+  margin-bottom: 0px;
+  text-align: center;
+}
+
+.formStyle li > label.inputLabel {
+  display: block;
+  margin-top: -20px;
+  background: #ffffff;
+  float: left;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #beaed3;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+.formStyle input[type="text"],
+.formStyle input[type="password"],
+.formStyle input[type="email"],
+.formStyle input[type="date"] {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  border: none;
+  display: block;
+  width: 100%;
+  font-size: 16px;
+  height: 30px;
+  color: #beaed3;
+  overflow: hidden;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+.formStyle li > span {
+  background: #f3f3f3;
+  display: block;
+  padding: 3px;
+  margin: 0 -9px -9px -9px;
+  border-radius: 0px 0px 10px 10px;
+  text-align: center;
+  color: red;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+.formStyle li.checkbox label {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+/* end of Forms and it's components related styling */
+
+.buttonStyle1 {
+  text-align: center;
+  border-radius: 10px;
+  background: blue;
+  color: #ffffff;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-size: 15px;
+  display: inline-block;
+  padding: 8px 23px;
+  transition-delay: 0.3s;
+  -webkit-transition-delay: 0.3s;
+}
+
+.buttonStyle1:hover {
+  color: blue;
+  background: #ffffff;
+  border-color: blue;
+}

@@ -1,23 +1,26 @@
 import React from "react";
 import Button from "./button";
-import styles from "./../style/sample.css";
+import "./../style/element_styles.css";
 
 class Input extends React.Component {
   render() {
     return (
-      <div>
-        <label htmlFor={this.props.name}>{this.props.label}:</label>
+      <li>
+        <label className="inputLabel" htmlFor={this.props.name}>
+          {this.props.label}:
+        </label>
         <input
-          className={styles.in1 + " " + styles.in}
           type={this.props.type}
           placeholder={this.props.placeholder}
           name={this.props.name}
           id={this.props.name}
           onChange={this.props.change}
+          onFocus={this.props.focus}
+          onBlur={this.props.blur}
           value={this.props.value || ""}
         />
-        <div>{this.props.validators}</div>
-      </div>
+        <span>{this.props.validators}</span>
+      </li>
     );
   }
 }
@@ -25,16 +28,16 @@ class Input extends React.Component {
 class CheckBox extends React.Component {
   render() {
     return (
-      <div>
+      <li className="checkbox">
         <input
           type={this.props.type}
           name={this.props.name}
-          id={this.props.id}
+          id={this.props.name}
           onChange={this.props.change}
           checked={this.props.value}
         />
         <label htmlFor={this.props.name}>{this.props.label}</label>
-      </div>
+      </li>
     );
   }
 }
@@ -69,23 +72,34 @@ class Form extends React.Component {
             change={this.props.handle[i]}
             value={this.props.value[i]}
             validators={this.props.validators[i].errors[0]}
+            helpText={this.props.helpText[i]}
+            focus={this.props.focus}
+            blur={this.props.blur}
           />
         );
       }
     }
-    return inputs;
+    return <ul>{inputs}</ul>;
   }
 
   render() {
     let inputs = this.addInput();
     const forms = (
-      <form action={this.props.action} method={this.props.method}>
+      <form
+        action={this.props.action}
+        method={this.props.method}
+        className="formStyle"
+      >
+        <h1>{this.props.header}</h1>
         {inputs}
-        <Button
-          type={this.props.button_type}
-          name={this.props.button_name}
-          click={this.props.button_click}
-        />
+        <li>
+          <Button
+            class="buttonStyle1"
+            type={this.props.button_type}
+            name={this.props.button_name}
+            click={this.props.button_click}
+          />
+        </li>
       </form>
     );
     return forms;

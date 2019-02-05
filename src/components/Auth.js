@@ -1,7 +1,7 @@
 import React from "react";
 import Form from "./elements/forms";
 import { Link } from "./elements/button";
-import { getCookie, setCookie, deleteCookie } from "./elements/cookie";
+import { setCookie, getCookie } from "./elements/cookie";
 import Validator, { updateValidators } from "./validators";
 
 class Login extends React.Component {
@@ -77,7 +77,19 @@ class Login extends React.Component {
       });
   };
 
+  Handlefocus = e => {
+    let name = e.target.name;
+    document.getElementById(name).parentElement.style.boxShadow =
+      "8px 8px 8px 8px #888888";
+  };
+
+  HandleBlur = e => {
+    let name = e.target.name;
+    document.getElementById(name).parentElement.style.boxShadow = "";
+  };
+
   HandleResponse = response => {
+    console.log(getCookie("Authorization"));
     if (response.hasOwnProperty("error") && response.error === 0) {
       // successfully Authorized, set the cookies.
       let args = {
@@ -117,10 +129,10 @@ class Login extends React.Component {
   render() {
     return (
       <div>
-        <h1>Login</h1>
         <div>{this.state.error_message}</div>
         <Form
           method="POST"
+          header="Login"
           action={this.state.basename}
           type={["text", "password", "checkbox"]}
           name={["user", "password", "remember"]}
@@ -130,8 +142,10 @@ class Login extends React.Component {
             this.HandlePassword,
             this.HandleRemember
           ]}
-          label={["username", "password", "remember me"]}
-          helpText={["Enter username", "Enteasasd asda"]}
+          focus={this.Handlefocus}
+          blur={this.HandleBlur}
+          label={["Username", "Password", "Remember me"]}
+          helpText={["This field is required", "This field is required"]}
           button_type="submit"
           button_name="Login"
           button_click={this.HandleFormSubmit}

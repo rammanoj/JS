@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Login from "./components/Auth";
+import { Routing } from "./components/routers";
 
-ReactDOM.render(<Login />, document.getElementById("root"));
-// ReactDOM.render(<List />, document.getElementById("sample"));
+ReactDOM.render(<Routing />, document.getElementById("root"));

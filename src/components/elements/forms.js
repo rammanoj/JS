@@ -1,8 +1,20 @@
 import React from "react";
 import Button from "./button";
 import "./../style/element_styles.css";
+import { Link } from "react-router-dom";
 
 class Input extends React.Component {
+  Handlefocus = e => {
+    let name = e.target.name;
+    document.getElementById(name).parentElement.style.boxShadow =
+      "8px 1px 3px 3px #888888";
+  };
+
+  HandleBlur = e => {
+    let name = e.target.name;
+    document.getElementById(name).parentElement.style.boxShadow = "";
+  };
+
   render() {
     return (
       <li>
@@ -15,8 +27,8 @@ class Input extends React.Component {
           name={this.props.name}
           id={this.props.name}
           onChange={this.props.change}
-          onFocus={this.props.focus}
-          onBlur={this.props.blur}
+          onFocus={this.Handlefocus}
+          onBlur={this.HandleBlur}
           value={this.props.value || ""}
         />
         <span>{this.props.validators}</span>
@@ -57,7 +69,7 @@ class Form extends React.Component {
             name={this.props.name[i]}
             type={this.props.type[i]}
             key={i}
-            change={this.props.handle[i]}
+            change={this.props.handle}
             value={this.props.value[i]}
           />
         );
@@ -69,12 +81,9 @@ class Form extends React.Component {
             type={this.props.type[i]}
             placeholder={this.props.placeholder[i]}
             key={i}
-            change={this.props.handle[i]}
+            change={this.props.handle}
             value={this.props.value[i]}
             validators={this.props.validators[i].errors[0]}
-            helpText={this.props.helpText[i]}
-            focus={this.props.focus}
-            blur={this.props.blur}
           />
         );
       }
@@ -83,21 +92,34 @@ class Form extends React.Component {
   }
 
   render() {
+    let link = "";
+    if (this.props.header === "Login Here..") {
+      link = (
+        <Link to="/forgot-password" style={{ paddingRight: "10px" }}>
+          Forgot Password ??
+        </Link>
+      );
+    }
     let inputs = this.addInput();
+    let var1 = (
+      <div>
+        <h5 style={{ color: "red" }}>{this.props.error}</h5>
+        <br />
+      </div>
+    );
     const forms = (
-      <form
-        action={this.props.action}
-        method={this.props.method}
-        className="formStyle"
-      >
+      <form className="formStyle">
         <h1>{this.props.header}</h1>
+        {this.props.error === "" ? "" : var1}
         {inputs}
-        <li>
+        <li className="form_button">
+          {link}
           <Button
-            class="buttonStyle1"
+            class="btn btn-primary"
             type={this.props.button_type}
             name={this.props.button_name}
             click={this.props.button_click}
+            disabled={this.props.disable}
           />
         </li>
       </form>

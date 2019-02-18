@@ -3,7 +3,7 @@ import Cookies from "universal-cookie";
 // Set Cookies
 export const setCookie = args => {
   let cookie = new Cookies();
-  for (let i = 0; i < args.length; i++) {
+  for (let i = 0; i < args.key.length; i++) {
     cookie.set(args.key[i], args.value[i], {
       path: "/",
       maxAge: args.age
@@ -13,15 +13,21 @@ export const setCookie = args => {
 // Get Cookies
 export const getCookie = name => {
   let cookie = new Cookies();
-  let info = cookie.get(name);
-  //   edit here, if expiry date is greater to the current date, delete it, else reutrn it.
-  return info;
+  // if (
+  // cookie.get("Authorization") !== undefined &&
+  // cookie.get("Authorization").age < Date.now()
+  // ) {
+  // deleteCookie(["Authorization", "UserId", "user"]);
+  // return cookie.get(name);
+  // } else {
+  return cookie.get(name);
+  // }
 };
 
 // Remove cookies
 export const deleteCookie = args => {
   let cookie = new Cookies();
   for (let i = 0; i < args.length; i++) {
-    cookie.remove(args.key[i]);
+    cookie.remove(args[i]);
   }
 };

@@ -4,7 +4,7 @@ const validator = {
       {
         test: /^[a-z0-9_]+$/,
         message:
-          "Username must contain only alphabets-numeric lowercase characters"
+          "Username can contain alphabets, numeric or lowercase characters"
       },
       {
         test: value => {
@@ -22,7 +22,7 @@ const validator = {
       {
         test: /^[a-z0-9_]+$/,
         message:
-          "Username must contain only alphabets-numeric lowercase characters"
+          "Username can contain alphabets, numeric or lowercase characters"
       },
       {
         test: value => {
@@ -48,12 +48,36 @@ const validator = {
     valid: false,
     state: ""
   },
+  confirm_password: {
+    rules: [
+      {
+        test: value => {
+          return value.length > 7;
+        },
+        message: "Password must not be shorter than 8 characters"
+      }
+    ],
+    errors: [],
+    valid: false,
+    state: ""
+  },
   email: {
     rules: [
       {
         test: /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
-        message:
-          "Username must contain only alphabets-numeric lowercase characters"
+        message: "Enter a valid email"
+      }
+    ],
+    errors: [],
+    valid: false,
+    state: ""
+  },
+  mobile: {
+    rules: [
+      {
+        // eslint-disable-next-line
+        test: /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/,
+        message: "Enter a valid phone number"
       }
     ],
     errors: [],

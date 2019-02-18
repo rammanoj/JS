@@ -1,4 +1,5 @@
 import React from "react";
+import loader from "./../../img/loader.gif";
 
 class Button extends React.Component {
   constructor() {
@@ -11,6 +12,7 @@ class Button extends React.Component {
         type={this.props.type}
         className={this.props.class}
         onClick={this.props.click}
+        disabled={this.props.disabled}
       >
         {this.props.name}
       </button>
@@ -18,17 +20,23 @@ class Button extends React.Component {
   }
 }
 
-class Link extends React.Component {
-  render() {
-    return <a href={this.props.uri}>{this.props.name}</a>;
-  }
-}
-
 class Image extends React.Component {
   render() {
-    return <img src={this.props.src} alt={this.props.alt} />;
+    return (
+      <img
+        src={this.props.src}
+        className={this.props.class}
+        alt={this.props.alt}
+      />
+    );
   }
 }
 
-export { Link, Image };
+class Loading extends React.Component {
+  render() {
+    return <Image src={loader} class="loading" />;
+  }
+}
+
+export { Image, Loading };
 export default Button;

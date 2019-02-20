@@ -164,12 +164,94 @@ li.navC a:hover {
 /* Loading */
 
 .loading {
-  /* background: green; */
   margin-left: 40%;
   margin-top: 15%;
 }
 
 /* End of Loading */
+
+/* Three Vertical Dots */
+
+.vertical-dots:after {
+  content: "\2807";
+  font-size: 1.4em;
+  color: #2e2e2e;
+}
+
+/* End of Three vertical dots */
+
+/* Table */
+
+.table-handle {
+  width: 70%;
+  margin-left: 15%;
+  margin-right: 15%;
+  margin-top: 0.5%;
+  overflow: hidden;
+}
+
+.table-handle td {
+  text-align: center;
+  overflow: hidden;
+  padding: 3px;
+}
+
+.table-handle tbody tr:hover {
+  cursor: pointer;
+}
+
+.table-handle thead th {
+  text-align: center;
+  overflow: hidden;
+  background: #90d6c7;
+  color: white;
+}
+
+/* End of table */
+
+/* Search Component */
+
+.list-header {
+  min-width: 70%;
+  margin-left: 20%;
+  margin-top: 3%;
+  padding: 1%;
+  border-radius: 15%;
+}
+.button {
+  border-radius: 10%;
+  border-color: #e0d3d3;
+  background: #90d6c7;
+  margin-left: 10%;
+  color: white;
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.button:hover {
+  box-shadow: 2px 2px 2px 2px #888888;
+}
+.input {
+  background: #fafafa;
+  border: none;
+  border-bottom: 2px solid #e0d3d3;
+  width: 30%;
+  transition: border-bottom-color 0.5s ease-in;
+}
+.input:focus {
+  border-bottom-color: #90d6c7;
+}
+
+.select {
+  width: 20%;
+  background: white;
+  border: 1px solid #e0d3d3;
+  border-radius: 5px;
+  margin-right: 5%;
+  text-align: center;
+  height: 30px;
+}
+
+/* End of Search Component */
 
 .hide {
   display: none;

@@ -80,17 +80,19 @@ class Login extends React.Component {
     this.setState({ disable: false });
     if (response.error === 0) {
       // successfully Authorized, set the cookies.
-      let args = {};
-      args.age = this.state.remember ? 30 * 86400 : 86400;
+      let args = {},
+        d = new Date();
+      let age = this.state.remember ? 30 * 86400 : 86400;
       args = {
         length: 2,
         key: ["Authorization", "user", "UserId"],
         value: [
-          { token: response.token, age: Date.now() + args.age },
+          { token: response.token, age: Date.now() + age },
           response.user,
           response.user_id
         ]
       };
+      args.age = age;
       setCookie(args);
       this.setState({ IsLoggedIn: true });
     } else {
@@ -416,7 +418,7 @@ class Logout extends React.Component {
   constructor() {
     super();
     this.state = {
-      IsLoggedIn: getCookie("Authorization").token !== undefined
+      IsLoggedIn: getCookie("Authorization") !== undefined
     };
   }
 

@@ -13,15 +13,19 @@ export const setCookie = args => {
 // Get Cookies
 export const getCookie = name => {
   let cookie = new Cookies();
-  // if (
-  // cookie.get("Authorization") !== undefined &&
-  // cookie.get("Authorization").age < Date.now()
-  // ) {
-  // deleteCookie(["Authorization", "UserId", "user"]);
-  // return cookie.get(name);
-  // } else {
-  return cookie.get(name);
-  // }
+  if (
+    cookie.get("Authorization") !== undefined &&
+    cookie.get("Authorization").age < Date.now()
+  ) {
+    console.log(Date.now());
+    console.log(cookie.get("Authorization").age);
+    console.log(cookie.get("Authorization").age < Date.now());
+    console.log("came here to delete the cookie");
+    deleteCookie(["Authorization", "UserId", "user"]);
+    return cookie.get(name);
+  } else {
+    return cookie.get(name);
+  }
 };
 
 // Remove cookies

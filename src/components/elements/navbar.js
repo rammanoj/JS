@@ -36,7 +36,6 @@ class NavBar extends React.Component {
         }
       });
       let data = await response.json();
-      console.log("got the data");
       this.generateNav(data.message);
     }
   }
@@ -92,11 +91,20 @@ class UnorderedList extends React.Component {
   render() {
     let list = [];
     for (let i = 0; i < this.props.list.length; i++) {
+      let k = i,
+        link = "";
+      if (this.props.hasOwnProperty("id")) {
+        k = this.props.id[i];
+      }
+      if (this.props.hasOwnProperty("link")) {
+        link = this.props.link[i];
+      }
       list.push(
         <List
           key={i}
+          id={k}
           name={this.props.list[i]}
-          link={this.props.link[i]}
+          link={link}
           class={this.props.ListClass[i]}
         />
       );
@@ -113,16 +121,20 @@ class List extends React.Component {
   }
 
   render() {
-    if (this.props.link) {
+    if (this.props.hasOwnProperty("link") && this.props.link !== undefined) {
       return (
-        <li className={this.props.class}>
+        <li className={this.props.class} id={this.props.id}>
           <Link to={this.props.link}>{this.props.name}</Link>
         </li>
       );
     } else {
-      return <li className={this.props.class}>{this.props.name}</li>;
+      return (
+        <li className={this.props.class} id={this.props.id}>
+          {this.props.name}
+        </li>
+      );
     }
   }
 }
 
-export { NavBar };
+export { NavBar, UnorderedList };

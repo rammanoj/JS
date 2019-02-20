@@ -7,3 +7,4 @@ export const register = basename + "accounts/signup/";
 export const forgotPassword = basename + "accounts/forgot_password/";
 export const navBar = basename + "accounts/navbar/";
 export const logout = basename + "accounts/logout/";
+export const booking = basename + "rooms/block/";

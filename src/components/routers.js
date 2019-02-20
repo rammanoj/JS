@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter, Route } from "react-router-dom";
-import { Home } from "./home";
+import { Home, Block } from "./home";
 import Login, { Register, ForgotPassword, Logout } from "./Auth";
 import { Loading } from "./elements/button";
 
@@ -18,6 +18,7 @@ export const Routing = props => (
       <Route exact path="/signup" component={Register} />
       <Route exact path="/forgot-password" component={ForgotPassword} />
       <Route exact path="/logout" component={Logout} />
+      <Route exact path="/Rooms" component={Block} />
       <Route exact path="/load" component={Loading} />
 
       {/* <Route exact path="*" render={() => <div>Not found</div>} /> */}

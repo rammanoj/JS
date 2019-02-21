@@ -46,7 +46,8 @@ class Loading extends React.Component {
       "elements": "elemet in block ...."
     }
   ],
-  "header": ['header1', 'header2', .... ]
+  "trHandler": "pass the handler function to the tr",
+  "header": ['header1', 'header2', .... ],
   "class": "list of classes to the tables",
   "tr_b_class": "Class to all tr in body",
   "tr_h_class": "Class to tr in head",
@@ -66,7 +67,6 @@ class Table extends React.Component {
       tr_b = [],
       { table } = this.props;
     for (let i in table.name) {
-      console.log(table.name[i]);
       tr_h.push(
         <th key={i} className={table.th_class}>
           {table.name[i]}
@@ -85,7 +85,12 @@ class Table extends React.Component {
         }
       }
       tr_b.push(
-        <tr key={j} id={table.elements[j].pk} className={table.tr_b_class}>
+        <tr
+          key={j}
+          id={table.elements[j].pk}
+          onClick={this.props.table.trHandler}
+          className={table.tr_b_class}
+        >
           {td}
         </tr>
       );
@@ -102,7 +107,10 @@ class Table extends React.Component {
 
 /*
 Format of the passed object:
-  
+  {
+    "options": [],
+    "item": "Name of the added item"
+  }
 */
 class SearchComponent extends React.Component {
   constructor() {

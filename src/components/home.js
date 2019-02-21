@@ -66,6 +66,22 @@ class Block extends React.Component {
     });
   };
 
+  trHandler(e) {
+    // Here on clicking the td both tr and td are being triggered, hence depending on classname
+    // to designate both of them.
+    if (
+      e.target.classList.length >= 0 &&
+      e.target.classList[0] != "more-button"
+    ) {
+      alert("triggered tr");
+    }
+  }
+
+  MoreHandler(e) {
+    // alert("clicked on the more option");
+    console.log(e.target);
+  }
+
   async componentDidMount() {
     if (getCookie("Authorization") !== undefined) {
       let responseD = await fetch(booking, {
@@ -74,6 +90,10 @@ class Block extends React.Component {
           Authorization: "Token " + getCookie("Authorization").token
         }
       });
+      let butonnCss = {
+        background: "inherit",
+        border: "none"
+      };
       let data = await responseD.json(),
         elements = {};
       elements["name"] = [];
@@ -83,9 +103,24 @@ class Block extends React.Component {
       elements["tr_h_class"] = "";
       elements["th_class"] = "";
       elements["td_class"] = "";
+      elements["trHandler"] = this.trHandler;
       elements["name"] = ["Blocks", "More Options"];
       for (let i in data.results) {
-        data.results[i].more = <div className="vertical-dots" />;
+        data.results[i].more = (
+          <div className="dropdown">
+            <button
+              style={butonnCss}
+              className="more-button"
+              onClick={this.MoreHandler}
+            >
+              <span className="vertical-dots" />
+            </button>
+            <ul>
+              <li>More</li>
+              <li>Delete</li>
+            </ul>
+          </div>
+        );
       }
       elements["elements"] = data.results;
       let table = <Table table={elements} />;

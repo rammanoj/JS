@@ -176,6 +176,8 @@ li.navC a:hover {
   content: "\2807";
   font-size: 1.4em;
   color: #2e2e2e;
+  background: inherit;
+  border: none;
 }
 
 /* End of Three vertical dots */
@@ -218,6 +220,7 @@ li.navC a:hover {
   padding: 1%;
   border-radius: 15%;
 }
+
 .button {
   border-radius: 10%;
   border-color: #e0d3d3;
@@ -252,6 +255,18 @@ li.navC a:hover {
 }
 
 /* End of Search Component */
+
+/* DropDown CSS (outsourced) */
+
+.dropdown ul {
+  position: absolute;
+}
+
+.dropdown:hover {
+  left: 0;
+}
+
+/* End of DropDown */
 
 .hide {
   display: none;

@@ -1,7 +1,7 @@
-
 # JS
 
 Different data types in JS
+
 1. **Number:** including floating point numbers
 2. **Boolean**
 3. **String**
@@ -16,6 +16,7 @@ Different data types in JS
 Reserved JS keywords can not be used for variable names.
 
 In JS variable names can start with
+
 1. Alphabet.
 2. Dollar
 3. Underscore
@@ -33,6 +34,7 @@ There are three different types of variable declarations in JS
 ```JS
 console.log(var1 + ‘ ‘ + var2); // var1 is numb and var 2 is string.
 ```
+
 **JS** adds the numbers till it encounters a string, once it encounters a string, it converts all the previous numb to a string.
 
 **JS** variables can be mutated, i.e updated once they are defined.
@@ -53,13 +55,19 @@ Values that are converted to **False** when evaluated are **Falsy** values.
 **Truthy:** Not a falsy values.
 
 **Functional statments:**
+
 ```js
-function sum(a, b) {return a + b;}
+function sum(a, b) {
+  return a + b;
+}
 ```
 
 **Functional expressions:**
+
 ```js
-var sum = function(a,b) {return a+b;}
+var sum = function(a, b) {
+  return a + b;
+};
 ```
 
 In both the above cases, calling functions, passing arguments etc are all same.
@@ -68,31 +76,34 @@ In both the above cases, calling functions, passing arguments etc are all same.
 Anything that produces an output on evaluation is called **Expressions**.
 There are different types of expressions
 **Eg:**
+
 1. Arithmetic
-2. string 
+2. string
 3. logical
-etc.
+   etc.
 
 **statements**
 Anything that executes some operations is called **statements**, **Eg:** statement declarations, conditional statements, loops, switch etc.
 
 **Expression statements:**
 when **js** expects a statement and an expression is used, then they are referred as expression statements.
-In case of defining or modifying variable (```var b = 9 + 10```). The output of the expression is being assigned to a statement. This is a side affect of the expressions. This is called **Expression statements**. ```sum;``` is another example where it returns the value of sum and also being treated as a statement.
+In case of defining or modifying variable (`var b = 9 + 10`). The output of the expression is being assigned to a statement. This is a side affect of the expressions. This is called **Expression statements**. `sum;` is another example where it returns the value of sum and also being treated as a statement.
 
 refer: https://medium.com/launch-school/javascript-expressions-and-statements-4d32ac9c0e74
 
 ---
 
 Objects can be defined in two different formats:
-1. using ```{}``` : called as Object literals.
-2. Using ``` new Object()```: Normal Object syntax.
+
+1. using `{}` : called as Object literals.
+2. Using `new Object()`: Normal Object syntax.
 
 **Functions** attached to the Objects are called **methods**. Each object has a **this** keyword assosiated with it.
 
-On assigning, a function expression to another variable, just write the name of the function without ```()```
+On assigning, a function expression to another variable, just write the name of the function without `()`
 
 Eg:
+
 ```js
 var sums = function(a, b) {return a + b}
 let a = {
@@ -108,7 +119,9 @@ As most old browsers can not work with ES6, ES7, so on. The applications written
 ECMA script is the organization that is monitoring JS now.
 
 ## Execution
+
 Every browser has a virtual environment that compiles JS. There will be some JS engines to compile java-script.
+
 1. Google V8 engine
 2. spider monkey
 3. js core
@@ -121,40 +134,131 @@ The code is then translated to machine code. Now the code is executed by the pro
 
 The default execution context is **Global Execution Context**. This is the place where all the globally defined functions and variables are stored. This can be treated as an object where all the variables and functions are accessed in the form of properties to the object.
 
-By default, these can be accessed via ```window``` object.
-For example, when a variable named ```name``` is declared in a file. It can be accessed in two ways 
-1. ```name```
-2. ```window.name```
+By default, these can be accessed via `window` object.
+For example, when a variable named `name` is declared in a file. It can be accessed in two ways
+
+1. `name`
+2. `window.name`
 
 Whenever a function is called, a new execution context is created and all the code inside the function will be execution in that respective execution contexts.
 
 All the **Execution contexts** are stored in form of **Execution stack** as shown below:
 ![](img/i1.png)
-Each **Execution context** object has two different phases:
-1. creation
-2. execution
+Once the execution of the function is completed, the **execution context** of the corresponding function also pops from the stack.
 
-In the phase of **creating**, there are three different process done:
-1. creating Variable Objects
+Each **Execution context** has the following
+
+1. Variable Objects
 2. Scope chain
 3. "this" variable
 
+Each **Execution context** object has two different phases:
+
+1. creation: The above three properties are defined in this phase.
+2. execution: The code is run line by line defining the variables.
+
 **variable objects:**
+
 1. argument object is created containing all the arguments passed to the function.
-2. The entire code is scanned and all the avialable function declarations are given a variable object.
+2. The entire code is scanned and all the available function declarations are given a variable object.
 3. For each variable declared, the variable object is created and assigned to **undefined**
 
 The steps (2 & 3) are called **hoisting**.
 
-**functions (declarations not expressions)** are referred before the execution starts, while the **variables** are referred only during the execution.
+**functions** and **variables** are hoisted in JS. It means that they are defined before the execution phase start. But they are hoisted in different way.
 
-**functions** and **variables** are hoisted in JS. It means that they are defnied before the execution phase start.
+**functions (declarations not expressions)** are referred before the execution starts, while the **variables** are referred only during the execution.
 
 If you call a function before it's definition, it is called, but if you call a variable before it's declaration, it is printed as undefined. If the variable is not declared and if it is accessed then, it raises an error.
 
 Each execution context has it's own variable objects declared.
 
-
 **Scoping**:
 
+Each function in JS creates a scope.
 
+**Lexical scoping:** A function has the access to all the variables and functions declared in the parent scope.
+
+If a JS engine does not find a variable in a current scope, it moves a step back to the parent scope and searches for it. If it does not find it in the parent scope even, then it still moves one step back. It moves back till it finds the variable of till the global scope is reached.
+
+If it does not find any variables till the global scope, then it raises an error. The process of moving back for finding the variable is known as scope chaining.
+
+![](img/i2.png)
+
+The scope chain moves from current level to the top level, it can not move in the reverse direction i.e a variable declared in the child function can not be accessed by the parent.
+
+**Execution Context stack** and **scope chain** are different. The first one depends on order in which functions are called, while the second one depends on the order in which the functions are declared.
+
+![](img/i3.png)
+
+**this keyword**:
+
+Every execution context has a **this** keyword that points to itself. When you try to access the **this** keyword from a function, it prints the window object.
+
+But in case of method, the this keyword points to the caller execution context. The **this** keyword is assigned when the object calls the particular function (inside the object).
+
+## DOM
+
+DOM is abbreviated as document object model. Every tag in HTML is treated as an object in the DOM.
+
+The interaction of JS with the web pages can be done with DOM. There is a JS DOM API through which the elements in the HTML page can be manipulated. The DOM can also be accessed via many other languages.
+
+`document.querySelector()` selects stuff in similar manner to CSS. But it returns only the first occurrence of the element.
+
+The selected element can be modified in two different ways:
+
+1. `textContent` - Using this only the text can be added.
+2. `innerHTML` - This can also be used to add HTML to DOM.
+
+There can be many other ways of accessing it, apart of the above two methods.
+
+`querySelector()` can be used for two purposes:
+
+1. reading the content from HTML document.
+2. Write the text or HTML content to the document.
+
+`document.querySelector('.classname').style.style_name` is used to change the styles of the selected element in CSS.
+
+`document.querySelectorAll()` is used in selecting all the elements instead of a single one.
+
+`document.getElementByID()` returns a unique element with the given ID.
+
+`document.getElementByClassName()` returns an array of elements with the given class name.
+
+`document.getElementsByTagName()` returns all the elements with the specified tag name. It returns all of them in the form of a array. If `*` is passed as an argument, it returns all the elements in DOM.
+
+## Events
+
+Performing any operation in the web page comes under events. Every event can be handled using the event handlers. Every event listener has it's own execution context.
+
+All the events in JS are put in a queue and executed one by one.
+
+Before manipulating any element in JS, it has to be selected first using the methods specified in above section. Once they are selected, any operations can be performed with them.
+
+In this section, we attach event listeners to them in-order to listen to particular events.
+
+The event handlers can be attached in the following format:
+
+```js
+document
+  .querySelector(".class_name")
+  .addEventListener("event_name", function() {
+    // function to handle the events,this is a callback function.
+  });
+```
+
+**Note:** Event handlers are executed only when the execution context stack is empty (i.e execution context stack has only the global object in it). If there are any other objects in it, all the objects are executed and then the event handler is called.
+
+You can find the list of available events here: https://developer.mozilla.org/en-US/docs/Web/Events
+
+## Appending and removing elements
+
+```js
+document.querySelector("elem").classList; //returns list of all classes in the element.
+```
+
+There can be few methods through which the above classList can be manipulated, they are like
+
+1. add: adds the class
+2. remove: removes the class.
+3. toggle: toggles between remove and add, etc.

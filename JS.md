@@ -22,20 +22,26 @@ In JS variable names can start with
 3. Underscore
 
 There are three different types of variable declarations in JS
-**const**: is to the nearest block it is defined.
+
+**const**: scope is to the nearest block it is defined.
+
 **let**: scope is to the nearest block it is defined.
+
 **var**: scope is in the nearest function it is defined.
+
 **not with var**: declaring in global scope.
 
 **const** has to be initialized and can not be updated. **let** can either be initialized or not and can be updated.
 
 **Type coercion:** JS automatically converts the variable types to another while needed
 
+Eg:
+
 ```JS
 console.log(var1 + ‘ ‘ + var2); // var1 is numb and var 2 is string.
 ```
 
-**JS** adds the numbers till it encounters a string, once it encounters a string, it converts all the previous numb to a string.
+**JS** adds the numbers till it encounters a string, once it encounters a string, it converts all the previous numb to a string. This is called type coercion.
 
 **JS** variables can be mutated, i.e updated once they are defined.
 
@@ -52,6 +58,7 @@ Values that are converted to **True** when evaluated are **Truthy** values.
 Values that are converted to **False** when evaluated are **Falsy** values.
 
 **Falsy:** undefined, null, '', NAN, 0
+
 **Truthy:** Not a falsy values.
 
 **Functional statments:**
@@ -82,7 +89,7 @@ There are different types of expressions
 3. logical
    etc.
 
-**statements**
+**statements**:
 Anything that executes some operations is called **statements**, **Eg:** statement declarations, conditional statements, loops, switch etc.
 
 **Expression statements:**
@@ -118,9 +125,11 @@ As most old browsers can not work with ES6, ES7, so on. The applications written
 
 ECMA script is the organization that is monitoring JS now.
 
+## JS working:
+
 ## Execution
 
-Every browser has a virtual environment that compiles JS. There will be some JS engines to compile java-script.
+Every browser has a virtual environment (called javascript engines) that compiles JS. There are three main JS engines to compile java-script.
 
 1. Google V8 engine
 2. spider monkey
@@ -167,9 +176,11 @@ The steps (2 & 3) are called **hoisting**.
 
 **functions** and **variables** are hoisted in JS. It means that they are defined before the execution phase start. But they are hoisted in different way.
 
-**functions (declarations not expressions)** are referred before the execution starts, while the **variables** are referred only during the execution.
+**functions (statments not expressions)** are referred before the execution starts, while the **variables** are referred only during the execution.
 
-If you call a function before it's definition, it is called, but if you call a variable before it's declaration, it is printed as undefined. If the variable is not declared and if it is accessed then, it raises an error.
+**function expressions** and variables are treated in similarly in hoisting (i.e both of them are initialized to **undefined**)
+
+If you call a function before it's definition, it works fine, but if you call a variable before it's declaration, it is printed as undefined. If the variable is not declared and if it is accessed then, it raises an error.
 
 Each execution context has it's own variable objects declared.
 
@@ -203,7 +214,7 @@ DOM is abbreviated as document object model. Every tag in HTML is treated as an 
 
 The interaction of JS with the web pages can be done with DOM. There is a JS DOM API through which the elements in the HTML page can be manipulated. The DOM can also be accessed via many other languages.
 
-`document.querySelector()` selects stuff in similar manner to CSS. But it returns only the first occurrence of the element.
+`document.querySelector()` selects elements in similar manner to CSS. But it returns only the first occurrence of the element.
 
 The selected element can be modified in two different ways:
 
@@ -262,3 +273,87 @@ There can be few methods through which the above classList can be manipulated, t
 1. add: adds the class
 2. remove: removes the class.
 3. toggle: toggles between remove and add, etc.
+
+## Object oriented programming through JS
+
+In JS a common function can be used as a blue print, instead of defining objects all the times. It is known as constructors. For examlple:
+
+```js
+var john = {
+  name: "John",
+  age: 21,
+  email: "john@gmail.com"
+};
+
+var marie = {
+  name: "Marie",
+  age: 24,
+  email: "marie@gmail.com"
+};
+
+/*
+ Instead of defining both of them individually, a common function can be used for defining it and instances of that function can be created.
+*/
+
+var Person = function(name, age, email) {
+  this.name = name;
+  this.age = age;
+  this.email = email;
+};
+
+var john1 = new Person("John", 21, "john@gmail.com");
+var marie1 = new Person("Marie", 24, "marie@gmail.com");
+```
+
+In the above example `Person` is a common function. All the other variables can create instances from it. Hence it is call a constructor. The `this` keyword is assigned to the corresponding variable (like **john1**, **marie1**) instead of global object because the `new` keyword creates an new object which is being assigned to the `john` and `marie` variables. The `this` keyword now points to the newly created object (i.e it generally points to the object which it belongs to) as it belongs to it.
+
+In the above `Person` defination, each instance has it's own properties and methods allocated to it. If methods are created in the above function, each instance even will have it's own memory to each of the methods. This affects performance!!
+
+To prevent it, we use prototypes. The prototypes are used in defining methods and properties. The methods and properties defined will be common to all the instances.
+
+The `hasOwnProperty()` method can only check with the original properties of the object (i.e not with the prototpye ones).
+
+Prototype can be used in following ways:
+
+![](img/i4.png)
+
+Each object that we create, defaulty inherits the Object class. Each class can a set of protoype properties and methods defined.
+
+If a method is called from a instance of a function and it initially searches in it's list of methods.
+
+If found, okay else it searches in the prototype methods.
+
+If it can not find in the prototype methods, then, it searches in the parent class prototype methods. If it reaches to the base one i.e Object class and if it could not find the method even in the Object class, then it may raise an error.
+
+The above process is called prototype chaining.
+
+The Objects can be created in two main different ways:
+
+1. function constructors.
+2. Object.create method
+
+Object creation using Object.create method:
+
+```js
+var personProto = {
+  calc: function() {
+    return 2019 - this.yearOfBirth;
+  }
+};
+
+var john = Object.create(personProto, {
+  name: { value: "John" },
+  yearOfBirth: { value: 1999 },
+  email: { value: "john@gmail.com" }
+});
+/* 
+
+The above code creates the an object with parameters name, 
+email and yearOfBirth.
+
+All the functions inside PersonProto will be assigned as prototype functions.
+
+
+This is the main difference between Object.create and function constructors.
+*/
+```
